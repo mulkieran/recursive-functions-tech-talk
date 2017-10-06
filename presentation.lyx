@@ -1,0 +1,1680 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass beamer
+\begin_preamble
+%\usetheme{Warsaw}
+\usetheme{Boadilla}
+% or ...
+
+\usecolortheme{orchid}
+\setbeamertemplate{footline}[frame number]{} % makes the footer EMPTY
+
+\setbeamercovered{transparent}
+% or whatever (possibly just delete it)
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "times" "default"
+\font_sans "lmss" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 2
+\use_package amssymb 2
+\use_package cancel 1
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Designing Correct Recursive Functions
+\end_layout
+
+\begin_layout Author
+Mulhern
+\end_layout
+
+\begin_layout Institute
+Red Hat, Inc.
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Who am I?
+\end_layout
+
+\begin_layout Standard
+A software engineer with some unusually strong background in:
+\end_layout
+
+\begin_layout Itemize
+formal methods
+\end_layout
+
+\begin_layout Itemize
+programming language principles
+\end_layout
+
+\begin_layout Itemize
+compiler construction
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+What is a recursive function?
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+A Recursive Function
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset listings
+lstparams "language=Python,tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def f():
+\end_layout
+
+\begin_layout Plain Layout
+
+	f()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+What does this function do? In Wisconsin we say it 
+\begin_inset Quotes eld
+\end_inset
+
+blows the stack
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+What is a recursive function?
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+What Python Does
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+  ...
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+  File "<stdin>", line 2, in f
+\end_layout
+
+\begin_layout Plain Layout
+
+RecursionError: maximum recursion depth exceeded
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+What is a recursive function?
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+What C Does
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[mulhern@localhost hypothesis-tech-talk-materials]$ ./a.out
+\end_layout
+
+\begin_layout Plain Layout
+
+Segmentation fault (core dumped)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+What is a recursive function?
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+What does racket do?
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+> (define f (lambda () (f)))
+\end_layout
+
+\begin_layout Plain Layout
+
+> (f)
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This will go on forever, consuming 100% of my CPU.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Example-Based Tests are a Good Idea
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+They are 
+\emph on
+much
+\emph default
+ better than nothing and there is good library support in Python
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Pytest: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://pytest.org/latest/
+\end_layout
+
+\end_inset
+
+ or the Python unittest package
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+They are an 
+\emph on
+implicit
+\emph default
+ and 
+\emph on
+partial
+\emph default
+ specification of the code they test.
+\end_layout
+
+\begin_layout Itemize
+They catch a surprising number of bugs in the code they test.
+\end_layout
+
+\begin_layout Itemize
+They catch regressions in new versions.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Example: Property-Based Testing (1)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Using Hypothesis to test a simple 
+\family typewriter
+convert_from_nat()
+\family default
+ function.
+\end_layout
+
+\begin_layout Enumerate
+Come up with a specification.
+\end_layout
+
+\begin_layout Enumerate
+Express the specification in Python.
+\end_layout
+
+\begin_layout Enumerate
+Use Hypothesis to test that the specification holds.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Formula $\forall v\geq0,\forall b\geq2,\mathtt{convert\_to\_nat}(\mathtt{convert\_from\_nat}(v,b),b)=v)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+A Simple Test Using Hypothesis
+\end_layout
+
+\end_inset
+
+
+\begin_inset listings
+lstparams "language=Python,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@given(
+\end_layout
+
+\begin_layout Plain Layout
+
+   value=strategies.integers(min_value=0),
+\end_layout
+
+\begin_layout Plain Layout
+
+   base=strategies.integers(min_value=2)
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+def test(value, base):
+\end_layout
+
+\begin_layout Plain Layout
+
+    result = convert_from_nat(value, base)
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert convert_to_nat(result, base) == value
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Example: Property-Based Testing (2)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Using Hypothesis to test a simple 
+\family typewriter
+convert_from_nat()
+\family default
+ function.
+\end_layout
+
+\begin_layout Theorem
+\begin_inset Formula $\forall v\geq0,\forall b\geq2,\mathtt{convert\_from\_nat}(v,b)\;does\;not\;have\;leading\;zeros.$
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+A Simple Test Using Hypothesis
+\end_layout
+
+\end_inset
+
+
+\begin_inset listings
+lstparams "language=Python,showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@given(
+\end_layout
+
+\begin_layout Plain Layout
+
+   value=strategies.integers(min_value=0),
+\end_layout
+
+\begin_layout Plain Layout
+
+   base=strategies.integers(min_value=2)
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+def test(value, base):
+\end_layout
+
+\begin_layout Plain Layout
+
+    result = convert_from_nat(value, base)
+\end_layout
+
+\begin_layout Plain Layout
+
+    assert result[:1] != [0]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+What Hypothesis Does with This Test Code
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Hypothesis generates, runs, and remembers tests to check the specified propertie
+s.
+\end_layout
+
+\begin_layout Enumerate
+It makes arguments for your test functions using the strategies specified.
+\end_layout
+
+\begin_layout Enumerate
+It runs tests for these arguments.
+\end_layout
+
+\begin_layout Enumerate
+It reports the results, stopping on the first failure, if any
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This will be changing soon to include multi-bug reporting for a single test
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+It stores the tests in a database, remembering the result.
+\end_layout
+
+\begin_layout Standard
+This is not a description of the implementation, just a simplified description
+ of what the user experiences.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Property-Based Testing is a who is deeply pessimistic.
+ Consequently I am fanatical about...
+\emph on
+Great
+\emph default
+ Idea
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Especially with Hypothesis.
+\end_layout
+
+\begin_layout Standard
+Hypothesis tests:
+\end_layout
+
+\begin_layout Itemize
+are an 
+\emph on
+explicit
+\emph default
+ and 
+\emph on
+partial
+\emph default
+ specification of the code they test.
+\end_layout
+
+\begin_layout Itemize
+more tests with less test code
+\end_layout
+
+\begin_layout Itemize
+employ code reuse in the choice of examples
+\end_layout
+
+\begin_layout Itemize
+favor examples that previously failed, enabling a simple-minded approach
+ to debugging
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Does not work with CI, but nice when debugging on a personal machine.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+are highly configurable
+\end_layout
+
+\begin_layout Itemize
+and so much more
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Property-Based Testing is not Easy
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Even with Hypothesis, the upfront costs are higher than with unit testing.
+\end_layout
+
+\begin_layout Standard
+A partial list of difficulties:
+\end_layout
+
+\begin_layout Itemize
+It may be difficult to come up with a useful specification
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+You can always cheat with example-based tests.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+It may be difficult to express that specification in Python.
+\end_layout
+
+\begin_layout Itemize
+It may be hard to test that specification in a reasonable amount of time.
+\end_layout
+
+\begin_layout Itemize
+It may be that Hypothesis does not have a strategy for generating the values
+ needed as arguments to the specification
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Hypothesis has some strategies for composing other strategies; I had used
+ Hypothesis for about 18 months before I felt the need to develop a purpose-buil
+t strategy.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+But the gains are, typically, very great.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+I Was Wrong...
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+I used to believe that property-based testing was only good for purely functiona
+l applications.
+\end_layout
+
+\begin_layout Standard
+Reasons:
+\end_layout
+
+\begin_layout Itemize
+I was first introduced to property-based testing in Haskell
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Haskell's QuickCheck is the original implementation of this idea.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Examples are typically in mathematics or Haskelly sorts of applications.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+...but Now I Know Better
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+I have used Hypothesis successfully with pyudev, a library that wraps libudev.
+\end_layout
+
+\begin_layout Standard
+When I took over this library from the original developer, I found that
+ he had been using property-based testing all along! All I needed to do
+ was Hypothesize it.
+\end_layout
+
+\begin_layout Standard
+Basic principles of property-based testing on libudev:
+\end_layout
+
+\begin_layout Itemize
+Run on a real system, using output of 
+\family typewriter
+udevadm
+\family default
+ as oracle.
+\end_layout
+
+\begin_layout Itemize
+Mock what needs to be mocked.
+\end_layout
+
+\begin_layout Itemize
+Check pyudev functions against themselves.
+\end_layout
+
+\begin_layout Itemize
+etc.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Example: Pyudev Hypothesis Testing
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Testing pyudev against itself 
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+More examples at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/pyudev/pyudev
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+A Simple Test Using Hypothesis
+\end_layout
+
+\end_inset
+
+
+\begin_inset listings
+lstparams "language=Python,basicstyle={\footnotesize},showstringspaces=false"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+@given(
+\end_layout
+
+\begin_layout Plain Layout
+
+   _CONTEXT_STRATEGY,
+\end_layout
+
+\begin_layout Plain Layout
+
+   strategies.sampled_from(_DEVICES)
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\begin_layout Plain Layout
+
+@settings(max_examples=5)
+\end_layout
+
+\begin_layout Plain Layout
+
+def test_from_name(self, a_context, a_device):       
+\end_layout
+
+\begin_layout Plain Layout
+
+   new_device = Devices.from_name(
+\end_layout
+
+\begin_layout Plain Layout
+
+      a_context,
+\end_layout
+
+\begin_layout Plain Layout
+
+      a_device.subsystem,
+\end_layout
+
+\begin_layout Plain Layout
+
+      a_device.sys_name
+\end_layout
+
+\begin_layout Plain Layout
+
+   )
+\end_layout
+
+\begin_layout Plain Layout
+
+   assert new_device == a_device
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Benefits of Hypothesizing the Tests
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+What was gained by using Hypothesis.
+\end_layout
+
+\begin_layout Itemize
+If the test couldn't be run, usually because no device with the correct
+ properties was available, get 1 skip message, not 100.
+\end_layout
+
+\begin_layout Itemize
+Test code is clearer.
+\end_layout
+
+\begin_layout Itemize
+Debugging is faster.
+\end_layout
+
+\begin_layout Itemize
+etc.
+\end_layout
+
+\begin_layout Standard
+Found a few signficant bugs in pyudev, a few significant problems in libudev,
+ and a significant problem with udev DEVLINKS property in the presence of
+ multipath.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Summary
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Property-based testing is great and so is Hypothesis.
+\end_layout
+
+\begin_layout Standard
+For all the reasons mentioned above:
+\end_layout
+
+\begin_layout Itemize
+memoization of examples that refute the specification
+\end_layout
+
+\begin_layout Itemize
+an explicit specification
+\end_layout
+
+\begin_layout Itemize
+code reuse
+\end_layout
+
+\begin_layout Itemize
+etc.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Not Discussed (1)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Property-based testing in other languages.
+\end_layout
+
+\begin_layout Itemize
+Proof of concept of Hypothesis in Java
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I haven't tried it.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Property-based testing in 
+\emph on
+many
+\emph default
+ other languages
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It's been tried and there is a list with estimates of quality at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+hypothesis.works
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Not Discussed (2)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Other Hypothesis features.
+\end_layout
+
+\begin_layout Itemize
+Hypothesis's example minimization
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I think my examples tend to be minimized by definition, although I'm not
+ sure.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+The 
+\family typewriter
+note()
+\family default
+ function, for displaying additional information about a failing test
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+This is most useful in CI, where you can't interact with the tests directly.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Hypothesis' higher-order strategies
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\family typewriter
+For example, builds()
+\family default
+ makes a strategy by applying a function to the values generated by other
+ strategies.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+How to write your own strategy from scratch.
+\end_layout
+
+\begin_layout Itemize
+Configuring Hypothesis globally or per-test
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+For example, setting 
+\family typewriter
+max-examples
+\family default
+ limits the number of examples tried per-test or per-run.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Using Hypothesis interactively, or just using its strategies
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+If you just want to interact with objects generated by a strategy within
+ the Python interpreter, that is an option, too.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Not Discussed (3)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Property-based testing challenges and strategies.
+\end_layout
+
+\begin_layout Itemize
+Testing GUIs
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I'm not often involved in writing Python GUIs.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Using coverage
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://coverage.readthedocs.io/en/coverage-4.0.3/index.html
+\end_layout
+
+\end_inset
+
+ and Hypothesis together
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+It is often meaningful when you run 100 tests on a method, and some portion
+ of the method is not covered.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Using custom strategies to generate mock objects.
+\end_layout
+
+\begin_layout Itemize
+Stateful testing
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Hypothesis has a way of, essentially, dynamically checking class invariants.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Not Discussed (4)
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Technical Remarks.
+\end_layout
+
+\begin_layout Itemize
+Hypothesis works with pytest and with unittest.
+\end_layout
+
+\begin_layout Itemize
+Hypothesis Python version support: 2.7, 3.3, 3.4, 3.5, 3.6 and Legacy 2.6
+\end_layout
+
+\begin_layout Itemize
+Hypothesis Python compiler support: CPython and PyPy.
+\end_layout
+
+\begin_layout Itemize
+Hypothesis is used to test itself.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Thanks
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Any questions or suggestions?
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
