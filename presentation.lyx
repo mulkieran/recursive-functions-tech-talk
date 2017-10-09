@@ -159,7 +159,7 @@ Introduction
 
 \begin_deeper
 \begin_layout FrameSubtitle
-What is a recursive function?
+A very simple recursive function.
 \end_layout
 
 \begin_layout ExampleBlock
@@ -235,7 +235,7 @@ Introduction
 
 \begin_deeper
 \begin_layout FrameSubtitle
-What is a recursive function?
+A very simple recursive function.
 \end_layout
 
 \begin_layout ExampleBlock
@@ -348,7 +348,7 @@ Introduction
 
 \begin_deeper
 \begin_layout FrameSubtitle
-What is a recursive function?
+A very simple recursive function.
 \end_layout
 
 \begin_layout ExampleBlock
@@ -375,7 +375,7 @@ status open
 
 \begin_layout Plain Layout
 
-[mulhern@localhost hypothesis-tech-talk-materials]$ ./a.out
+[mulhern@localhost]$ ./a.out
 \end_layout
 
 \begin_layout Plain Layout
@@ -415,7 +415,7 @@ Introduction
 
 \begin_deeper
 \begin_layout FrameSubtitle
-What is a recursive function?
+A very simple recursive function.
 \end_layout
 
 \begin_layout ExampleBlock
@@ -423,7 +423,7 @@ What is a recursive function?
 status open
 
 \begin_layout Plain Layout
-What does racket do?
+What racket Does
 \end_layout
 
 \end_inset
@@ -467,87 +467,12 @@ This will go on forever, consuming 100% of my CPU.
 
 \end_layout
 
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Example-Based Tests are a Good Idea
-\end_layout
-
-\end_inset
-
-
-\begin_inset Separator latexpar
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout FrameSubtitle
-They are 
-\emph on
-much
-\emph default
- better than nothing and there is good library support in Python
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Pytest: 
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-http://pytest.org/latest/
-\end_layout
-
-\end_inset
-
- or the Python unittest package
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-They are an 
-\emph on
-implicit
-\emph default
- and 
-\emph on
-partial
-\emph default
- specification of the code they test.
-\end_layout
-
-\begin_layout Itemize
-They catch a surprising number of bugs in the code they test.
-\end_layout
-
-\begin_layout Itemize
-They catch regressions in new versions.
-\end_layout
-
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator parbreak
-\end_inset
-
-
-\end_layout
-
 \begin_layout FragileFrame
 \begin_inset Argument 4
 status open
 
 \begin_layout Plain Layout
-Example: Property-Based Testing (1)
+Introduction
 \end_layout
 
 \end_inset
@@ -561,30 +486,7 @@ Example: Property-Based Testing (1)
 
 \begin_deeper
 \begin_layout FrameSubtitle
-Using Hypothesis to test a simple 
-\family typewriter
-convert_from_nat()
-\family default
- function.
-\end_layout
-
-\begin_layout Enumerate
-Come up with a specification.
-\end_layout
-
-\begin_layout Enumerate
-Express the specification in Python.
-\end_layout
-
-\begin_layout Enumerate
-Use Hypothesis to test that the specification holds.
-\end_layout
-
-\begin_layout Theorem
-\begin_inset Formula $\forall v\geq0,\forall b\geq2,\mathtt{convert\_to\_nat}(\mathtt{convert\_from\_nat}(v,b),b)=v)$
-\end_inset
-
-
+A very simple recursive function.
 \end_layout
 
 \begin_layout ExampleBlock
@@ -592,55 +494,93 @@ Use Hypothesis to test that the specification holds.
 status open
 
 \begin_layout Plain Layout
-A Simple Test Using Hypothesis
+What C Does
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout ExampleBlock
 \begin_inset listings
-lstparams "language=Python,showstringspaces=false"
 inline false
 status open
 
 \begin_layout Plain Layout
 
-@given(
+[mulhern@localhost]$ ./a.out
 \end_layout
 
 \begin_layout Plain Layout
 
-   value=strategies.integers(min_value=0),
-\end_layout
-
-\begin_layout Plain Layout
-
-   base=strategies.integers(min_value=2)
-\end_layout
-
-\begin_layout Plain Layout
-
-)
-\end_layout
-
-\begin_layout Plain Layout
-
-def test(value, base):
-\end_layout
-
-\begin_layout Plain Layout
-
-    result = convert_from_nat(value, base)
-\end_layout
-
-\begin_layout Plain Layout
-
-    assert convert_to_nat(result, base) == value
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+This will go on forever, consuming 100% of my CPU.
+ The difference between this and the previous C example is a compilation
+ flag: 
+\begin_inset listings
+inline true
+status open
+
+\begin_layout Plain Layout
+
+-O3
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+So, what does this function do?
+\end_layout
+
+\begin_layout Standard
+It 
+\begin_inset Flex Emphasize
+status open
+
+\begin_layout Plain Layout
+diverges
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \end_deeper
@@ -656,7 +596,133 @@ def test(value, base):
 status open
 
 \begin_layout Plain Layout
-Example: Property-Based Testing (2)
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+Another very simple recursive function.
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+Another Recursive Function
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout ExampleBlock
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+def f():
+\end_layout
+
+\begin_layout Plain Layout
+
+    return 2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This function is 
+\begin_inset Flex Emphasize
+status open
+
+\begin_layout Plain Layout
+degenerate
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Introduction
+\end_layout
+
+\end_inset
+
+
+\begin_inset Separator latexpar
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout FrameSubtitle
+What is my purpose?
+\end_layout
+
+\begin_layout Standard
+To introduce you to the only technique I know of that works to help you
+ write recursive functions that are 
+\begin_inset Flex Emphasize
+status open
+
+\begin_layout Plain Layout
+correct
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator parbreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout FragileFrame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+The Canonical Recursive Function
 \end_layout
 
 \end_inset
